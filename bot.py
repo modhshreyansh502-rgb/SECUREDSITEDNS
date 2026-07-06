@@ -204,19 +204,18 @@ Previous chat:
 
 Bot:
 """
-
     try:
-      response = client.models.generate_content(
-    model="gemini-2.5-flash",
-    contents=prompt
-)
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt
+        )
 
         answer = response.text.strip()
         user_memory[chat_id].append(f"Bot: {answer}")
 
-    except Exception:
+    except Exception as e:
+        print("GEMINI ERROR:", e)
         answer = "❌ Sorry, abhi response generate nahi ho pa raha. Thodi der baad try kare."
-
     final_answer = answer + PROMO
 
     for part in split_message(final_answer):
